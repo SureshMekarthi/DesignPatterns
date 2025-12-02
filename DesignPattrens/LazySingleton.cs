@@ -6,22 +6,20 @@ using System.Threading.Tasks;
 
 namespace DesignPattrens
 {
-    internal class LazySingleton
+    internal sealed class LazySingleton
     {
-        private static LazySingleton _instance;
+        private static readonly Lazy<LazySingleton> lazySingleton = new Lazy<LazySingleton>(() => new LazySingleton());
 
         private LazySingleton()
         {
         }
 
-        public static LazySingleton getInstance()
-        {
-            if(_instance == null)
-            {
-                _instance = new LazySingleton();
-            }
-            return _instance;
+        //public static LazySingleton GetInstance()
+        //{
+        //    return lazySingleton.Value;
+        //}
 
-        }
+        public static LazySingleton GetInstance() => lazySingleton.Value;
+      
     }
 }
