@@ -10,7 +10,9 @@ namespace DesignPattrens
     {
         static void Main(string[] args)
         {
-
+            Practice practice = new Practice();
+            Console.WriteLine($"the result: {practice.MinSubArrayLen(5, new int[] { 2, 3, 1, 1, 1, 1, 1 })}"); 
+            Console.ReadLine();
         }
     }
 }
