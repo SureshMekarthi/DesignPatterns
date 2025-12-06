@@ -35,47 +35,32 @@ namespace DesignPattrens
         //    return result;
         //}
 
-        public int MinSubArrayLen(int target, int[] nums)
+
+        public int SubarraySum(int[] nums, int k)
         {
-            Dictionary<int, int> dic = new Dictionary<int, int>() { };
-            int result = 0;
+            int currentSum = 0;
+            int resultCount = 0;
+
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            dic[0] = 1;
             for (int i = 0; i < nums.Length; i++)
             {
-                int sum = 0;
-
-                for (int j = i; j < nums.Length; j++)
+                currentSum = currentSum + nums[i];
+                int excludedSum = currentSum - k;
+                if (dic.ContainsKey(excludedSum))
                 {
-                    sum = sum + nums[j];
-
-                    if (dic.ContainsKey(sum))
-                    {
-                        if (dic[sum] > j - i + 1)
-                        {
-                            dic[sum] = j - i + 1;
-                        }
-                    }
-                    else
-                    {
-                        dic[sum] = j - i + 1;
-                    }
+                    resultCount = resultCount + dic[excludedSum];
+                }
+                if (dic.ContainsKey(currentSum))
+                {
+                    dic[currentSum]++;
+                }
+                else
+                {
+                    dic[currentSum] = 1;
                 }
             }
-
-            foreach (var sum in dic.Keys)
-            {
-                if (sum >= target)
-                {
-                    if(result == 0)
-                    {
-                        result = dic[sum];
-                    }
-                    else if (result > dic[sum])
-                    {
-                        result = dic[sum];
-                    }
-                }
-            }
-            return result;
+            return resultCount;
         }
     }
 }
