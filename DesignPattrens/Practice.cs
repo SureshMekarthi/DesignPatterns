@@ -8,59 +8,29 @@ namespace DesignPattrens
 {
     internal class Practice
     {
-        //public int SubarraySum(int[] nums, int k)
-        //{
-
-        //    int key = 0;
-        //    int result = 0;
-        //    Dictionary<int, int> dic = new Dictionary<int, int>();
-        //    for (int i = 0; i < nums.Length; i++)
-        //    {
-        //        int sum = 0;
-        //        for (int j = i; j < nums.Length; j++)
-        //        {
-        //            sum = sum + nums[j];
-        //            dic[key] = sum;
-        //            key++;
-        //        }
-        //    }
-        //    foreach (int num in dic.Values)
-        //    {
-        //        if (num == k)
-        //        {
-        //            result++;
-        //        }
-
-        //    }
-        //    return result;
-        //}
-
-
-        public int SubarraySum(int[] nums, int k)
+        public int mostFrequentElement(int[] nums)
         {
-            int currentSum = 0;
-            int resultCount = 0;
+           // int resultNum = 0;
 
-            Dictionary<int, int> dic = new Dictionary<int, int>();
-            dic[0] = 1;
+            Dictionary<int, int> map = new Dictionary<int, int>();
+
             for (int i = 0; i < nums.Length; i++)
             {
-                currentSum = currentSum + nums[i];
-                int excludedSum = currentSum - k;
-                if (dic.ContainsKey(excludedSum))
+                if (map.ContainsKey(nums[i]))
                 {
-                    resultCount = resultCount + dic[excludedSum];
-                }
-                if (dic.ContainsKey(currentSum))
-                {
-                    dic[currentSum]++;
+                    map[nums[i]] = map[nums[i]] + 1;
                 }
                 else
                 {
-                    dic[currentSum] = 1;
+
+                    map[nums[i]] = 1;
                 }
             }
-            return resultCount;
+
+            var keyvalue= map.OrderByDescending(x=>x.Value).First();
+            return keyvalue.Key;
         }
+
+
     }
 }

@@ -11,7 +11,7 @@ namespace DesignPattrens
         static void Main(string[] args)
         {
             Practice practice = new Practice();
-            Console.WriteLine($"the result: {practice.MinSubArrayLen(7, new int[] { 2, 3, 1, 2, 4, 3 })}"); 
+            Console.WriteLine($"the result: {practice.mostFrequentElement( new int[] { 2, 3, 1, 2, 4, 3 })}"); 
             Console.ReadLine();
         }
     }
