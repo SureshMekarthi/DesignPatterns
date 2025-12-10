@@ -9,31 +9,29 @@ namespace DesignPattrens
 {
     internal class Practice
     {
-        
-          public List<List<string>> GroupAnagrams(string[] strs)
+
+        public int[] TopKFrequent(int[] nums, int k)
         {
+            Dictionary<int, int> map = new Dictionary<int, int>();
 
-            Dictionary<string, List<string>> map = new Dictionary<string, List<string>>();
-            foreach (var s in strs)
+            for (int i = 0; i < nums.Length; i++)
             {
-
-               var chars= s.ToCharArray();
-                Array.Sort(chars);
-                var key = new string(chars);
-
-                if (!map.ContainsKey(key))
+                if (!map.ContainsKey(nums[i]))
                 {
-                    map[key] = new List<string>();
+                    map[nums[i]] = 1;
                 }
-
-                map[key].Add(key);
-
+                else
+                {
+                    map[nums[i]]++;
+                }
             }
 
-            return map.Values.ToList();
+           int[] result = map.Where(kv => kv.Value >= k)
+                            .OrderByDescending(kv => kv.Key)
+                            .Select(kv => kv.Key)
+                            .ToArray();
 
-
-
+            return result;
         }
 
     }
