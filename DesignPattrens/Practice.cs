@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,29 +9,34 @@ namespace DesignPattrens
 {
     internal class Practice
     {
-        public int mostFrequentElement(int[] nums)
+        
+          public List<List<string>> GroupAnagrams(string[] strs)
         {
-           // int resultNum = 0;
 
-            Dictionary<int, int> map = new Dictionary<int, int>();
-
-            for (int i = 0; i < nums.Length; i++)
+            Dictionary<string, List<string>> map = new Dictionary<string, List<string>>();
+            foreach (var s in strs)
             {
-                if (map.ContainsKey(nums[i]))
-                {
-                    map[nums[i]] = map[nums[i]] + 1;
-                }
-                else
-                {
 
-                    map[nums[i]] = 1;
+               var chars= s.ToCharArray();
+                Array.Sort(chars);
+                var key = new string(chars);
+
+                if (!map.ContainsKey(key))
+                {
+                    map[key] = new List<string>();
                 }
+
+                map[key].Add(key);
+
             }
 
-            var keyvalue= map.OrderByDescending(x=>x.Value).First();
-            return keyvalue.Key;
+            return map.Values.ToList();
+
+
+
         }
 
-
     }
+
 }
+

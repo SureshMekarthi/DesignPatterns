@@ -11,7 +11,8 @@ namespace DesignPattrens
         static void Main(string[] args)
         {
             Practice practice = new Practice();
-            Console.WriteLine($"the result: {practice.mostFrequentElement( new int[] { 2, 3, 1, 2, 4, 3 })}"); 
+            //Console.WriteLine($"the result: {practice.TwoSum( new List<int> { -6, 7, 1, -7, 6, 2 }, 3 )}");
+            Console.WriteLine($"the result: {practice.GroupAnagrams(new string[] {  "act", "pots", "tops", "cat", "stop", "hat" })}");
             Console.ReadLine();
         }
     }
