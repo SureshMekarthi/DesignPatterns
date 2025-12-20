@@ -10,30 +10,21 @@ namespace DesignPattrens
     internal class Practice
     {
 
-        public int[] TopKFrequent(int[] nums, int k)
-        {
-            Dictionary<int, int> map = new Dictionary<int, int>();
 
-            for (int i = 0; i < nums.Length; i++)
+        public bool IsPalindrome(string s)
+        {
+            s.Replace(" ", "");
+            char[] result = s.ToCharArray();
+
+            for (int i = 0; i < result.Length; i++)
             {
-                if (!map.ContainsKey(nums[i]))
+                if (result[i] != result[result.Length - i - 1])
                 {
-                    map[nums[i]] = 1;
-                }
-                else
-                {
-                    map[nums[i]]++;
+                    return false;
                 }
             }
-
-           int[] result = map.Where(kv => kv.Value >= k)
-                            .OrderByDescending(kv => kv.Key)
-                            .Select(kv => kv.Key)
-                            .ToArray();
-
-            return result;
+            return true;
         }
-
     }
 
 }
