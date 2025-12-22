@@ -9,23 +9,50 @@ namespace DesignPattrens
 {
     internal class Practice
     {
-
-
-        public bool IsPalindrome(string s)
+        //{-2,-2,-1,-1,0,0,2,2})
+        public List<List<int>> ThreeSum(int[] nums)
         {
-            s.Replace(" ", "");
-            char[] result = s.ToCharArray();
+            List<List<int>> result = new List<List<int>>();
 
-            for (int i = 0; i < result.Length; i++)
+            Array.Sort(nums);
+
+            int n = nums.Length;
+
+            for (int i = 0; i < n - 2; i++)
             {
-                if (result[i] != result[result.Length - i - 1])
+                int j = i + 1; int k = n - 1;
+                if(i > 0 && nums[i] == nums[i - 1])
                 {
-                    return false;
+                    continue;
                 }
+                if(nums[i] > 0)
+                {
+                    break;
+                }
+                
+                int sum = nums[i] + nums[j] + nums[k];
+                while (j < k)
+                {
+                    if (sum > 0)
+                    {
+                        k--;
+                    }
+                    else if (sum < 0)
+                    {
+                        j++;
+                    }
+                    else
+                    {
+                        result.Add(new List<int> { nums[i], nums[j], nums[k] });
+                        j++;
+                        k--;
+                    }
+                }
+
             }
-            return true;
+            return result;
+
         }
     }
-
 }
 
