@@ -9,48 +9,35 @@ namespace DesignPattrens
 {
     internal class Practice
     {
-        //{-2,-2,-1,-1,0,0,2,2})
-        public List<List<int>> ThreeSum(int[] nums)
+      //{ 1, 7, 2, 5, 4, 7, 3, 6 }
+        public int MaxArea(int[] heights)
         {
-            List<List<int>> result = new List<List<int>>();
 
-            Array.Sort(nums);
+            int left = 0; int right = heights.Length - 1;
+            int max = 0;
 
-            int n = nums.Length;
-
-            for (int i = 0; i < n - 2; i++)
+            while (left < right)
             {
-                int j = i + 1; int k = n - 1;
-                if(i > 0 && nums[i] == nums[i - 1])
-                {
-                    continue;
-                }
-                if(nums[i] > 0)
-                {
-                    break;
-                }
-                
-                int sum = nums[i] + nums[j] + nums[k];
-                while (j < k)
-                {
-                    if (sum > 0)
-                    {
-                        k--;
-                    }
-                    else if (sum < 0)
-                    {
-                        j++;
-                    }
-                    else
-                    {
-                        result.Add(new List<int> { nums[i], nums[j], nums[k] });
-                        j++;
-                        k--;
-                    }
-                }
+                int width = right - left;
+                int hight = Math.Min(heights[left], heights[right]);
+                int area = width * hight;
 
+                if (heights[left] < heights[right])
+                {
+                    left++;
+                }
+                else if (heights[left] > heights[right])
+                {
+                    right--;
+                }
+                else
+                {
+                    left++;
+                    right--;
+                }
+                max = Math.Max(max, area);
             }
-            return result;
+            return max;
 
         }
     }
